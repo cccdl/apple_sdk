@@ -1,5 +1,15 @@
 # 苹果内购 SDK for PHP  !
 
+## 重要提示：
+
+> verifyReceipt 端点已弃用。要在你的服务器上验证收据，请在服务器上执行在设备上验证收据 中的步骤。要在你的服务器上不使用收据验证
+> App 内购买项目，请调用 App Store Server API 获取顾客的 Apple 签名的交易和订阅信息，或者验证你的 App 获取的 AppTransaction
+> 和 Transaction 签名的数据。你也可以从 App Store Server Notifications V2 获取同样的签名交易和订阅信息。
+[获取交易历史V1【苹果官网废弃说明】](https://developer.apple.com/documentation/appstoreserverapi/get_transaction_history_v1 "获取交易历史V1【废弃说明】")
+[通过 App Store 验证收据【苹果官网废弃说明】](https://developer.apple.com/cn/documentation/storekit/in-app_purchase/validating_receipts_with_the_app_store/ "通过 App Store 验证收据【苹果官网废弃说明】")
+
+> 苹果已经把v1版本废弃了，预计2-3年就会彻底要求迁移
+
 ### 主要新特性
 
 * 简化使用方法
@@ -8,7 +18,10 @@
 
 ### 更新日志
 
-- 1.0.0 增加验证苹果内购凭据，支持沙盒模式
+| 版本号   | 更新内容                                                                                            | 备注 | 更新日期      |
+|-------|-------------------------------------------------------------------------------------------------|----|-----------|
+| 1.0.0 | 增加验证苹果内购凭据，支持沙盒模式                                                                               | -  |           |
+| 2.0.0 | 1. 增加《Get Transaction History》《获取交易历史消息》v2版本（直接跳过v1版本）<br>2. 新版本不支1.0.0旧版本凭据验证，如需使用请直接使用1.0.0版本 | -  | 2024年8月9日 |
 
 ## 安装
 
@@ -18,13 +31,23 @@
 $ composer require cccdl/apple_sdk
 ```
 
-### 使用
+## 使用教程
+
+### v1.0.0
 
 ```php
 $app = new Verify();
 //开启沙盒模式 true=沙盒 false=生产正式
 $app->setSandBox(true);
 $res = $app->doVerify('苹果凭据');
+```
+
+### v2.0.0
+
+```php
+$config = Config::getConfig();
+$app = new History($config, true);
+$res = $app->getTransactionHistory('transactionId',[]);
 ```
 
 ## 文档
