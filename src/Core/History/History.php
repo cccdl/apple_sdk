@@ -60,6 +60,6 @@ class History extends AppleBase
     public function getTransactionHistory($transactionId, array $params = [])
     {
         $url = '/inApps/v2/history/' . $transactionId;
-        $this->get($url, $params);
+        return $this->get($url, $params);
     }
 }

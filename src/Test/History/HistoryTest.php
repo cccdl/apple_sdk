@@ -21,7 +21,8 @@ class HistoryTest extends TestCase
     {
         $config = Config::getConfig();
         $app = new History($config, true);
-        $res = $app->getTransactionHistory('123123123', []);
+        $res = $app->getTransactionHistory('aaaa', []);
+        $data = $app->decodeSignedTransactions($res['signedTransactions']);
 
 //        $app->setSandBox(true);
 //        $res = $app->doVerify('苹果凭据');

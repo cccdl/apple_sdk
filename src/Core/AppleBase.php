@@ -137,4 +137,19 @@ class AppleBase
 
         return JWT::encode($payload, $this->key, 'ES256', $this->keyId);
     }
+
+    /**
+     * 解码signedTransactions Apple 签名的 JSON Web 签名 （JWS） 格式的一系列客户 App 内购买交易。
+     * @param $signedTransactions
+     * @return array
+     */
+    public function decodeSignedTransactions($signedTransactions): array
+    {
+
+        //分割内容
+        $sign = explode('.', $signedTransactions);
+
+        // 解密有效负载
+        return json_decode(base64_decode($sign[1]), true);
+    }
 }
