@@ -32,7 +32,7 @@ trait Request
         $response = $client->get($url, ['query' => $param]);
 
         if ($response->getStatusCode() != 200) {
-            throw new cccdlException('请求失败: ' . $response->getStatusCode() .);
+            throw new cccdlException('请求失败: ' . $response->getStatusCode());
         }
 
         return json_decode($response->getBody(), true);
