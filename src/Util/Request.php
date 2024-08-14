@@ -17,23 +17,22 @@ trait Request
 
     /**
      * post请求
+     * @param $url
+     * @param $param
      * @return mixed
      * @throws GuzzleException
      * @throws cccdlException
      */
-    protected function get($url, $param)
+    protected function get($url, $param): mixed
     {
 
         //创建客户端
         $client = $this->createClient();
 
-        $response = $client->get($url);
-
-        var_dump($response->getStatusCode());
-        var_dump($response->getBody());
+        $response = $client->get($url, ['query' => $param]);
 
         if ($response->getStatusCode() != 200) {
-            throw new cccdlException('请求失败: ' . $response->getStatusCode());
+            throw new cccdlException('请求失败: ' . $response->getStatusCode() .);
         }
 
         return json_decode($response->getBody(), true);
