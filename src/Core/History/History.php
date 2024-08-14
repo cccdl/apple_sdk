@@ -53,11 +53,11 @@ class History extends AppleBase
      *  文档地址：https://developer.apple.com/documentation/appstoreserverapi/get_transaction_history
      *
      *
-     * @return void
+     * @return array
      * @throws GuzzleException
      * @throws cccdlException
      */
-    public function getTransactionHistory($transactionId, array $params = [])
+    public function getTransactionHistory($transactionId, array $params = []): array
     {
         $url = '/inApps/v2/history/' . $transactionId;
         return $this->get($url, $params);
