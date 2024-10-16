@@ -12,7 +12,7 @@ class AppleBase
      * 正式地址
      * @var string
      */
-    protected string $url = 'https://api.storekit-sandbox.itunes.apple.com';
+    protected string $url = 'https://api.storekit.itunes.apple.com';
 
     /**
      * 沙盒地址
